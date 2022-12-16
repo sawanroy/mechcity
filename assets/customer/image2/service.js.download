@@ -1,0 +1,303 @@
+var app = angular.module('App');
+app.service('CommonService', function ($http, $rootScope) {
+        'use strict';
+        var CommonService = {}
+        ;
+        CommonService.getSportsapi = function ($scope) {
+            var request = $http({
+                method: 'POST', url: "https://website.huddle.cc/web/subtype/list", headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8'
+                }
+            });
+            return request
+        };
+
+        CommonService.getCid = function ($scope) {
+
+            var request = $http({
+                    method: 'POST', url: "https://website.huddle.cc/razorpay/order/new",
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8'
+                    },
+                    data: $scope.crequest
+                }
+            );
+            return request
+        };
+
+        CommonService.createTicket = function ($scope) {
+            var request = $http({
+                    method: 'POST', url: "https://website.huddle.cc/create/ticket", headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8'
+                    }
+                    , data: 'name=' + $scope.username + '&mobile=' + $scope.usermobile + '&email=' + $scope.useremail
+                }
+            );
+            return request
+        }
+        ;
+        CommonService.createTicket1 = function ($scope) {
+            var request = $http({
+                    method: 'POST', url: "https://website.huddle.cc/create/ticket",
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8'
+                    },
+                    data: 'name=' + $scope.username + '&mobile=' + $scope.usermobile + '&email=' + $scope.useremail + '&provider_name=' + $scope.selItem + '&service_name=' + $rootScope.sub_type + '&package_name=null'
+                }
+            );
+            return request
+        }
+        ;
+        CommonService.createTicket2 = function ($scope) {
+            var request = $http({
+                    method: 'POST',
+                    url: "https://website.huddle.cc/create/ticket",
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8'
+                    }
+                    ,
+                    data: 'name=' + $scope.username + '&mobile=' + $scope.usermobile + '&email=' + $scope.useremail + '&provider_name=' + $scope.providerDetails.provider_name + '&service_name=' + $rootScope.sub_type + '&package_name=null'
+                }
+            );
+            return request
+        }
+        ;
+        CommonService.signUp = function ($scope) {
+            if ($rootScope.userlocation == undefined) {
+                $rootScope.userlocation = {}
+            }
+            var request = $http({
+                    method: 'POST',
+                    url: "https://website.huddle.cc/player/register",
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8'
+                    }
+                    ,
+                    data: 'name=' + $rootScope.username + '&mobile=&email=' + $rootScope.useremail + '&fb_id=' + $rootScope.fbid + '&city=' + $rootScope.userlocation.name + '&graph_data={"Player":{"id":"' + $rootScope.fbid + '","name":"' + $rootScope.username + '","email":"' + $rootScope.useremail + '","gender":"' + $rootScope.gender + '","birthday":"01\/28\/1989","location":{"id":"' + $rootScope.userlocation.id + '","name":"' + $rootScope.userlocation.name + '"},"work":[{"employer":{"id":"215503911808390","name":"BLISS Infosoft Pvt. Ltd."},"location":{"id":"110362072324510","name":"Lucknow, Uttar Pradesh"},"position":{"id":"146255685390317","name":"Android Developer"},"start_date":"0000-00","id":"578758908803300"}],"education":[{"school":{"id":"134736773220291","name":"SGM High School"},"type":"High School","year":{"id":"113125125403208","name":"2004"},"id":"201090629903465"},{"school":{"id":"102248516493792","name":"sgm kanpur"},"type":"College","year":{"id":"137616982934053","name":"2006"},"id":"375494495796410"},{"school":{"id":"114192588597113","name":"riet kanpur"},"type":"College","year":{"id":"144044875610606","name":"2011"},"id":"201090643236797"},{"degree":{"id":"140065339390579","name":"B.Tech"},"school":{"id":"110141295682065","name":"UPTU"},"type":"Graduate School","year":{"id":"144044875610606","name":"2011"},"id":"327535570592303"}]},"Device":"Android","Friendlist":{"data":[{"name":"Varun Jindal","id":"10209881763894048"},{"name":"Vishal Lunia","id":"10209410714362967"},{"name":"Gaurav Shukla","id":"10208204412060927"},{"name":"Himanshu Jain","id":"10205062704927378"},{"name":"Ashish Kumar","id":"1058956687475181"},{"name":"Siddhant Panhalkar","id":"1128429480532798"},{"name":"Akhil R Nair","id":"1196796173697799"},{"name":"Rahul Garg","id":"1136146063104374"},{"name":"Alok Tripathi","id":"1062892140432368"},{"name":"Bharat Vargesh","id":"1154118654648915"},{"name":"Arvind Prajapati","id":"1170786732984173"},{"name":"Gaurav Shukla","id":"1081082198622224"},{"name":"Prince Pandey","id":"1024307017636303"},{"name":"Nirmal Singh","id":"1099069656830205"},{"name":"Mobin Mirza","id":"1126061670798434"},{"name":"Manish Upadhyay","id":"1042926915798473"},{"name":"Esha Tripathi","id":"1087629624665196"},{"name":"Tabish Bhatti","id":"1027194294043820"},{"name":"Ravi Dosi","id":"903016026475903"},{"name":"Rahul Yadav","id":"620948501413680"},{"name":"Surbhi Shukla","id":"1758231251099241"}],"paging":{"cursors":{"before":"QVFIUi0td250MU5jZATJPaTlTMzFJa3NHU0pvMWZAHaEUteXdGWE5uSXdza0loMk5sRXFPb25VSHE4bjV6dm9VWDZAmeGgZD","after":"QVFIUlJBQTktMG03WDkyOWFTbzFkZAmtLSWNWS3dNSjdWVFcxTkRHUUxnUUN4al9iY2xlZADlYaFdfM2R3TTdDc0hVdDVTTmt5cG55U05XV2N6ekFMSGQ0VUV3"}},"summary":{"total_count":392}}}&device_id=clf3uPlmg-U:APA91bEiIuDdYtqyxt1f3juJ1k6uGuXK0FiP8vlsAFP270Bt-ecVPn-X1JKlZ4P7r6mMnyHJgChcb2Qc38_5Xn1YNHdyMWzV2LkiJGfgvtSuxEDr3WstjyO_GNpjBCs2-6F6T5xSeW8f&code='
+                }
+            );
+            return request
+        }
+        ;
+        CommonService.getProviderapi = function ($scope) {
+            var request = $http({
+                    method: 'POST', url: "https://website.huddle.cc/web/service/listing", headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8'
+                    }
+                    , data: "lat=" + $scope.lat + "&long=" + $scope.lng + "&subtype=" + $rootScope.sub_type + "&page=" + $scope.pagenum
+                }
+            );
+            return request
+        }
+        ;
+        CommonService.websiteTicket = function ($scope) {
+            if ($scope.username == undefined || $scope.username == 'undefined') {
+                var username = ''
+            }
+            else {
+                var username = $scope.username
+            }
+            if ($scope.useremail == undefined || $scope.useremail == 'undefined') {
+                var useremail = ''
+            }
+            else {
+                var useremail = $scope.useremail
+            }
+            if ($scope.usermobile == undefined || $scope.usermobile == 'undefined') {
+                var usermobile = ''
+            }
+            else {
+                var usermobile = $scope.usermobile
+            }
+            if ($rootScope.selecteddatevaltemp == undefined || $rootScope.selecteddatevaltemp == 'undefined') {
+                var selecteddatevaltemp = ""
+            }
+            else {
+                var a = $rootScope.selecteddatevaltemp.split("-");
+                var selecteddatevaltemp = a[2] + "-" + a[1] + "-" + a[0]
+            }
+            if ($rootScope.selectedslot == undefined || $rootScope.selectedslot == 'undefined') {
+                var selectedslot = ""
+            }
+            else {
+                var selectedslot = $rootScope.selectedslot
+            }
+            var vData = {
+                    "player_id": null,
+                    "type": $scope.pageName,
+                    "name": username,
+                    "email": useremail,
+                    "mobile": usermobile,
+                    "subtype": $rootScope.sub_type,
+                    "service_id": $rootScope.service_id,
+                    "service_name": $scope.servicen,
+                    "provider_id": $rootScope.provider_id,
+                    "provider_name": $scope.providern,
+                    "slot_date": selecteddatevaltemp,
+                    "slot_name": selectedslot,
+                    "link": $scope.pageUrl,
+                    "created_at": $scope.currentDate
+                }
+            ;
+            var request = $http({
+                    method: "POST", dataType: "json", url: 'https://website.huddle.cc/website/ticket', contentType: "application/json; charset=utf-8", data: JSON.stringify(vData)
+                }
+            );
+            return request
+        }
+        ;
+        CommonService.getSlotData = function ($scope, dat, day, month) {
+            var x = dat.split("-");
+            var date = x[2] + "-" + x[1] + "-" + x[0];
+            var request = $http({
+                    method: 'POST',
+                    url: "https://website.huddle.cc/web/package/slot",
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8'
+                    }
+                    ,
+                    data: "date=" + date + "&day=" + day.toLowerCase() + "&package_id=" + $rootScope.package_id + "&service_id=" + $rootScope.service_id + "&provider_id=" + $rootScope.provider_id
+                }
+            );
+            return request
+        }
+        ;
+        CommonService.getProfileapi2 = function ($scope) {
+            var request = $http({
+                    method: 'POST', url: "https://website.huddle.cc/package/listing/new", headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8'
+                    }
+                    , data: "player_id=" + $rootScope.player_id + "&service_id=" + $rootScope.service_id
+                }
+            );
+            return request
+        }
+        ;
+        CommonService.getProfileapi = function ($scope) {
+            var request = $http({
+                    method: 'POST', url: "https://website.huddle.cc/web/service/landing", headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8'
+                    }
+                    , data: $scope.req
+                }
+            );
+            return request
+        }
+        ;
+
+        CommonService.callsmslink = function (mobile) {
+            var req = {"mobile_no": mobile}
+            var request = $http({
+                    method: 'POST', url: "https://website.huddle.cc/get/app/sms",
+                    headers: {
+                        'Content-Type': 'application/json; charset=utf-8'
+                    },
+
+                    data: JSON.stringify(req)
+                }
+            );
+            return request
+        }
+        ;
+        CommonService.getslotapi = function ($scope) {
+            var request = $http({
+                    method: 'POST',
+                    url: "https://website.huddle.cc/provider/data",
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8'
+                    }
+                    ,
+                    data: "provider_id=" + $rootScope.provider_id + "&loc_lat=28.6351649491102&loc_long=77.364745775682&subtype=" + $scope.subtype + "&book_day=" + $scope.selecteddayval + "&book_date=" + $scope.selecteddateval
+                }
+            );
+            return request
+        }
+        ;
+        CommonService.decidelater = function ($scope) {
+            var request = $http({
+                    method: 'POST', url: "https://website.huddle.cc/provider/price/range", headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8'
+                    }
+                    , data: "subtype=" + $rootScope.sub_type + "&provider_id=" + $rootScope.provider_id
+                }
+            );
+            return request
+        }
+        ;
+        CommonService.checkoutapi = function ($scope) {
+            var request = $http({
+                    method: 'POST', url: "https://website.huddle.cc/rate/details", headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8'
+                    }
+                    , data: "provider_id=" + $rootScope.provider_id + "&package_id=" + $rootScope.package_id
+                }
+            );
+            return request
+        }
+        ;
+        CommonService.payapi = function ($scope) {
+            var request = $http({
+                    method: 'POST', url: " https://website.huddle.cc/v3/booking", headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8'
+                    }
+                    , data: $rootScope.bookrequest
+                }
+            );
+            return request
+        };
+        CommonService.V4Booking = function ($scope) {
+            var request = $http({
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json; charset=utf-8'
+                    },
+                    dataType: "json",
+                    url: " https://website.huddle.cc/v4/booking",
+                    data: JSON.stringify($scope.bookrequest)
+                }
+            );
+            return request
+        };
+
+        CommonService.contact = function ($scope) {
+            var request = $http({
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8'
+                    },
+
+                    url: " https://website.huddle.cc/web/provider/contactus",
+                    data: $scope.bookrequest
+                }
+            );
+            return request
+        };
+
+
+        CommonService.calllocation = function (input) {
+            var request = $http({
+                    method: 'GET',
+                    dataType: "jsonp",
+                    cache: !1,
+                    url: " https://maps.googleapis.com/maps/api/place/autocomplete/json?input=" + input + "&key=AIzaSyCtvMMR5DiXeTvjF4f5lcrct0-tQ_slzx8&location=28.7041,77.1025&radius=50000&types=(regions)"
+                }
+            );
+            return request
+        }
+        ;
+        CommonService.calllonglat = function (address) {
+            var request = $http({
+                    method: 'POST',
+                    dataType: "jsonp",
+                    url: "https://maps.googleapis.com/maps/api/geocode/json?address=" + address + "&sensor=false&key=AIzaSyCtvMMR5DiXeTvjF4f5lcrct0-tQ_slzx8",
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8'
+                    }
+                }
+            );
+            return request
+        }
+        ;
+        return CommonService
+    }
+)

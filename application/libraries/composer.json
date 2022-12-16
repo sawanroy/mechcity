@@ -1,0 +1,7 @@
+{
+    "name": "google/login",
+    "description": "google login for mechcity",
+    "require": {
+        "google/apiclient": "^2.0"
+    }
+}
